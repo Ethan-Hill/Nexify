@@ -19,7 +19,8 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "tailwindcss": "^2.0.2",
-    "typeface-work-sans": "^1.1.13"
+    "typeface-work-sans": "^1.1.13",
+    "webpack": "^5.15.0"
   },
   "devDependencies": {
     "postcss-preset-env": "^6.7.0"
