@@ -1,5 +1,5 @@
 const withProgressBar = require("next-progressbar");
-
+var path = require("path");
 module.exports = withProgressBar({
   //...
   resolve: {
