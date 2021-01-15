@@ -1,8 +1,8 @@
 import React from "react";
-import UserImage from "../Profile/User/UserImage";
-import UserName from "../Profile/User/UserName";
-import UserEmail from "../Profile/User/UserEmail";
-import UserAccountButton from "../Profile/User/UserAccountButton";
+import UserImage from "./User/UserImage.js";
+import UserName from "./User/UserName.js";
+import UserEmail from "./User/UserEmail.js";
+import UserAccountButton from "./User/UserAccountButton.js";
 
 export default function UserInfo({ user }) {
   return (

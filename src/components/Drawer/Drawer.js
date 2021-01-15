@@ -1,6 +1,6 @@
 import React from "react";
 import wrapCustomElement from "@shoelace-style/react-wrapper";
-import DrawerItem from "./Items/DrawerItem";
+import DrawerItem from "./Items/DrawerItem.js";
 const ShoelaceDrawer = wrapCustomElement("sl-drawer");
 const ShoelaceMenuDivider = wrapCustomElement("sl-menu-divider");
 

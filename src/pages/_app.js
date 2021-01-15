@@ -1,6 +1,6 @@
 import "tailwindcss/tailwind.css";
 import { ThemeProvider } from "next-themes";
-import Drawer from "../components/Drawer/Drawer";
+import Drawer from "../components/Drawer/Drawer.js";
 import { Provider } from "next-auth/client";
 
 require("typeface-work-sans");

@@ -1,8 +1,8 @@
 import Head from "next/head";
-import HeroTitle from "../components/Index/HeroTitle";
-import Switch from "../components/Switch";
-import Logout from "../components/Auth/Logout";
-import Login from "../components/Auth/Login";
+import HeroTitle from "../components/Index/HeroTitle.js";
+import Switch from "../components/Switch.js";
+import Logout from "../components/Auth/Logout.js";
+import Login from "../components/Auth/Login.js";
 import { useSession } from "next-auth/client";
 
 export default function Home() {

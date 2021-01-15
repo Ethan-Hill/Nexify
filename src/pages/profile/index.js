@@ -1,9 +1,9 @@
 import Head from "next/head";
-import UserInfo from "../../components/profile/UserInfo";
-import Switch from "../../components/Switch";
-import Loading from "../../components/Loading";
-import Logout from "../../components/Auth/Logout";
-import Protected from "../../components/Protected";
+import UserInfo from "../../components/profile/UserInfo.js";
+import Switch from "../../components/Switch.js";
+import Loading from "../../components/Loading.js";
+import Logout from "../../components/Auth/Logout.js";
+import Protected from "../../components/Protected.js";
 import { useSession } from "next-auth/client";
 
 export default function Profile() {
