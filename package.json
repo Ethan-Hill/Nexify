@@ -1,5 +1,5 @@
 {
-  "name": "nextify",
+  "name": "nexify",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,8 +8,20 @@
     "start": "next start"
   },
   "dependencies": {
+    "@shoelace-style/react-wrapper": "^1.0.3",
+    "@svgr/webpack": "^5.5.0",
+    "autoprefixer": "^10.2.1",
+    "axios": "^0.21.1",
     "next": "10.0.5",
+    "next-auth": "^3.1.0",
+    "next-themes": "^0.0.10",
+    "postcss": "^8.2.4",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "tailwindcss": "^2.0.2",
+    "typeface-work-sans": "^1.1.13"
+  },
+  "devDependencies": {
+    "postcss-preset-env": "^6.7.0"
   }
 }
