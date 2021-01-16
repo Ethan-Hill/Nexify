@@ -1,6 +1,7 @@
 import "tailwindcss/tailwind.css";
 import { ThemeProvider } from "next-themes";
-import Drawer from "../components/Drawer/Drawer.js";
+import dynamic from "next/dynamic";
+const Drawer = dynamic(() => import("../components/Drawer/Drawer.js"));
 import Router from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";

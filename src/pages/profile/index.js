@@ -1,8 +1,9 @@
 import Head from "next/head";
-import UserInfo from "../../components/profile/UserInfo.js";
-import Switch from "../../components/Switch.js";
-import Loading from "../../components/Loading.js";
-import Protected from "../../components/Protected.js";
+import dynamic from "next/dynamic";
+const UserInfo = dynamic(() => import("../../components/profile/UserInfo.js"));
+const Switch = dynamic(() => import("../../components/Switch.js"));
+const Loading = dynamic(() => import("../../components/Loading.js"));
+const Protected = dynamic(() => import("../../components/Protected.js"));
 import { useSession } from "next-auth/client";
 
 function Profile() {

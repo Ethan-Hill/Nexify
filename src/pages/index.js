@@ -1,6 +1,7 @@
 import Head from "next/head";
-import HeroTitle from "../components/Index/HeroTitle.js";
-import Switch from "../components/Switch.js";
+import dynamic from "next/dynamic";
+const HeroTitle = dynamic(() => import("../components/Index/HeroTitle.js"));
+const Switch = dynamic(() => import("../components/Switch.js"));
 
 export default function Home() {
   return (

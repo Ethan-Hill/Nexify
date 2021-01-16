@@ -1,8 +1,11 @@
 import React from "react";
+
+import dynamic from "next/dynamic";
+const DrawerItem = dynamic(() => import("./Items/DrawerItem.js"));
+const Login = dynamic(() => import("../Auth/Login"));
+const Logout = dynamic(() => import("../Auth/Logout"));
+
 import wrapCustomElement from "@shoelace-style/react-wrapper";
-import DrawerItem from "./Items/DrawerItem.js";
-import Login from "../Auth/Login";
-import Logout from "../Auth/Logout";
 const ShoelaceDrawer = wrapCustomElement("sl-drawer");
 const ShoelaceMenuDivider = wrapCustomElement("sl-menu-divider");
 

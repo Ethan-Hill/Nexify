@@ -1,11 +1,13 @@
 import React from "react";
-import UserImage from "./User/UserImage.js";
-import UserLocaton from "./User/UserFlag.js";
-import UserName from "./User/UserName.js";
-import UserEmail from "./User/UserEmail.js";
-import UserActivity from "./User/UserActivity.js";
-import UserAccountButton from "./User/UserAccountButton.js";
-import Logout from "../Auth/Logout";
+
+import dynamic from "next/dynamic";
+const UserImage = dynamic(() => import("./User/UserImage.js"));
+const UserLocaton = dynamic(() => import("./User/UserFlag.js"));
+const UserName = dynamic(() => import("./User/UserName.js"));
+const UserEmail = dynamic(() => import("./User/UserEmail.js"));
+const UserActivity = dynamic(() => import("./User/UserActivity.js"));
+const UserAccountButton = dynamic(() => import("./User/UserAccountButton.js"));
+const Logout = dynamic(() => import("../Auth/Logout"));
 
 export default function UserInfo({ user }) {
   return (
