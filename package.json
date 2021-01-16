@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "export": "yarn run build && next export -o _static"
   },
   "dependencies": {
     "@shoelace-style/react-wrapper": "^1.0.3",
