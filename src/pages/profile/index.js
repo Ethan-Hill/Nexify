@@ -2,19 +2,17 @@ import Head from "next/head";
 import UserInfo from "../../components/profile/UserInfo.js";
 import Switch from "../../components/Switch.js";
 import Loading from "../../components/Loading.js";
-import Logout from "../../components/Auth/Logout.js";
 import Protected from "../../components/Protected.js";
 import { useSession } from "next-auth/client";
 
-export default function Profile() {
+function Profile() {
   const [session, loading] = useSession();
 
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
         <Head>
-          <title>Home</title>
-          <link rel="icon" href="/favicon.ico" />
+          <title>Profile</title>
           <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.css"
@@ -37,8 +35,7 @@ export default function Profile() {
     return (
       <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
         <Head>
-          <title>Home</title>
-          <link rel="icon" href="/favicon.ico" />
+          <title>Profile</title>
           <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.css"
@@ -52,9 +49,8 @@ export default function Profile() {
             href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/themes/dark.css"
           />
         </Head>
-        <main className="flex flex-col items-center justify-center flex-1 text-center">
+        <main className="flex flex-col items-center justify-center flex-1 w-8/12 text-center">
           <UserInfo user={session.user} />
-          <Logout />
           <Switch />
         </main>
       </div>
@@ -63,3 +59,5 @@ export default function Profile() {
     return <Protected />;
   }
 }
+
+export default Profile;

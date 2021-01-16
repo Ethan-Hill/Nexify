@@ -2,8 +2,10 @@ import React from "react";
 
 export default function UserName({ name }) {
   return (
-    <h1 className="my-6 text-lg sm:text-xl md:text-3xl">
-      Display Name: <span className="text-spotifyGreen">{name}</span>
-    </h1>
+    <div className="px-6 py-4 my-auto">
+      <h1 className="text-2xl font-semibold text-white dark:text-gray-700 ">
+        {name}
+      </h1>
+    </div>
   );
 }

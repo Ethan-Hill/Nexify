@@ -1,17 +1,29 @@
 import React from "react";
 import UserImage from "./User/UserImage.js";
+import UserLocaton from "./User/UserFlag.js";
 import UserName from "./User/UserName.js";
 import UserEmail from "./User/UserEmail.js";
+import UserActivity from "./User/UserActivity.js";
 import UserAccountButton from "./User/UserAccountButton.js";
+import Logout from "../Auth/Logout";
 
 export default function UserInfo({ user }) {
   return (
-    <div className="p-5 shadow-2xl xl:w-144 xl:h-144">
-      <div className="flex flex-col items-center justify-center w-full h-full ">
-        <UserImage src={user.image} className="my-5" />
+    <div className="my-4 overflow-hidden transition duration-500 ease-in-out transform rounded-lg shadow-2xl bg-backgroundBlue dark:bg-white hover:scale-105">
+      {" "}
+      <div className="flex w-full h-full lg:w-64 lg:flex-col lg:justify-center ">
+        <UserImage src={user.profile} />
+        {/* <UserActivity type={user.profile.product} /> */}
+
         <UserName name={user.name} />
-        <UserEmail email={user.email} />
-        <UserAccountButton url={user.profile.external_urls.spotify} />
+        <div className="px-6 my-auto ">
+          <UserEmail email={user.email} />
+          <UserLocaton location={user.profile.country} />
+        </div>
+        <div className="flex flex-wrap items-center justify-around py-6 mx-6 w-144 lg:flex-col lg:mx-0 lg:w-full">
+          <UserAccountButton url={user.profile.external_urls.spotify} />
+          <Logout />
+        </div>
       </div>
     </div>
   );
