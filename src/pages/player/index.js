@@ -7,8 +7,9 @@ const Loading = dynamic(() => import("../../components/Loading.js"));
 const Protected = dynamic(() => import("../../components/Protected.js"));
 import { useSession, getSession } from "next-auth/client";
 
-function Profile() {
+function Player() {
   const [session, loading] = useSession();
+
   const Router = useRouter();
 
   if (!session) {
@@ -67,7 +68,7 @@ function Profile() {
   }
 }
 
-Profile.getInitialProps = async (context) => {
+Player.getInitialProps = async (context) => {
   const session = await getSession(context);
 
   return {
@@ -75,4 +76,4 @@ Profile.getInitialProps = async (context) => {
   };
 };
 
-export default Profile;
+export default Player;

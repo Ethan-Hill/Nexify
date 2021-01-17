@@ -9,7 +9,7 @@ export default function Protected() {
   const Router = useRouter();
 
   const handleRoute = () => {
-    Router.push({ pathname: "/", query: { error: "Not Logged In" } });
+    Router.push({ pathname: "/", query: { error: "Page was not found" } });
   };
   return (
     <div className="flex flex-col items-center justify-center w-screen min-h-screen text-center">
@@ -28,7 +28,7 @@ export default function Protected() {
           href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/themes/dark.css"
         />
       </Head>
-      <h1 className="text-3xl">Please Sign in before visiting here</h1>
+      <h1 className="text-3xl">404 - Page Not Found</h1>
       <ShoelaceButton
         type="default"
         size="large"
