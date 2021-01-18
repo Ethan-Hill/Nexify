@@ -55,6 +55,18 @@ function App({ Component, pageProps, session }) {
             <meta name="theme-color" content="#151c3c" />
             <meta name="description" content="Spotify All In One." />
             <link rel="icon" href="/favicon.ico" />
+            <link
+              rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.css"
+            />
+            <script
+              type="module"
+              src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.esm.js"
+            ></script>
+            <link
+              rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/themes/dark.css"
+            />
           </Head>
           <Drawer session={session} />
           <Component {...pageProps} />
