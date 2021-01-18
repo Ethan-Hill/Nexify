@@ -14,6 +14,7 @@ const options = {
   ],
   session: {
     jwt: true,
+    signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
   },
   callbacks: {
     jwt: async (token, user, account) => {
@@ -35,10 +36,7 @@ const options = {
       session.user.refreshToken = token.refreshToken;
       return Promise.resolve(session);
     },
-    redirect: async (url) => {
-      if (url === "/api/auth/signin") {
-        return Promise.resolve("/profile");
-      }
+    redirect: async () => {
       return Promise.resolve("/");
     },
   },

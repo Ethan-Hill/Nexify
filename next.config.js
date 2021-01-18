@@ -1,7 +1,5 @@
-const withProgressBar = require("next-progressbar");
 var path = require("path");
-module.exports = withProgressBar({
-  //...
+module.exports = {
   resolve: {
     modules: ["node_modules", "js"],
     alias: {
@@ -14,4 +12,4 @@ module.exports = withProgressBar({
       maxDuration: 30,
     },
   },
-});
+};

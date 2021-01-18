@@ -32,6 +32,9 @@ export default function Drawer({ session }) {
         <ShoelaceDrawer className="drawer-placement-left" placement="left">
           <div className="flex flex-col items-center w-full h-full ">
             <Login />
+            <ShoelaceMenuDivider
+              style={{ width: "200px", marginTop: "24px" }}
+            />
             <DrawerItem title="Home" link="/?error=Not+Logged+In" />
             <DrawerItem title="Profile" link="/?error=Not+Logged+In" />
             <DrawerItem title="Player" link="/?error=Not+Logged+In" />

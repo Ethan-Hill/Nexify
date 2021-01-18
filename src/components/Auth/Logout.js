@@ -7,7 +7,11 @@ const ShoelaceIcon = wrapCustomElement("sl-icon");
 
 export default function Logout() {
   return (
-    <ShoelaceButton type="default" size="large" onClick={() => signOut()}>
+    <ShoelaceButton
+      type="default"
+      size="large"
+      onClick={() => signOut({ callbackUrl: `http://localhost:3000/ap` })}
+    >
       <ShoelaceIcon
         name="door-open-fill"
         style={{ paddingRight: "10px" }}

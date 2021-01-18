@@ -6,15 +6,18 @@ const Switch = dynamic(() => import("../../components/Switch.js"));
 const Loading = dynamic(() => import("../../components/Loading.js"));
 const Protected = dynamic(() => import("../../components/Protected.js"));
 import { useSession, getSession } from "next-auth/client";
+import { useEffect } from "react";
 
 function Player() {
   const [session, loading] = useSession();
 
   const Router = useRouter();
 
-  if (!session) {
-    Router.push({ pathname: "/", query: { error: "Not Logged In" } });
-  }
+  useEffect(() => {
+    if (!session) {
+      Router.push({ pathname: "/", query: { error: "Not Logged In" } });
+    }
+  }, []);
 
   if (loading) {
     return (
