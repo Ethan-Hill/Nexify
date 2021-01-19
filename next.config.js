@@ -11,6 +11,8 @@ const settings = {
   },
   pwa: {
     dest: "public",
+    register: true,
+    scope: "/src",
   },
 };
 
