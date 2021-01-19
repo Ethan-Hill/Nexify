@@ -14,14 +14,14 @@
     "axios": "^0.21.1",
     "next": "10.0.5",
     "next-auth": "^3.1.0",
+    "next-pwa": "^5.0.4",
     "next-themes": "^0.0.10",
     "nprogress": "^0.2.0",
     "postcss": "^8.2.4",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "tailwindcss": "^2.0.2",
-    "typeface-work-sans": "^1.1.13",
-    "webpack": "^5.15.0"
+    "typeface-work-sans": "^1.1.13"
   },
   "devDependencies": {
     "postcss-preset-env": "^6.7.0"

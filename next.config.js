@@ -1,5 +1,7 @@
 var path = require("path");
-module.exports = {
+const withPWA = require("next-pwa");
+
+const settings = {
   resolve: {
     modules: ["node_modules", "js"],
     alias: {
@@ -12,4 +14,13 @@ module.exports = {
       maxDuration: 30,
     },
   },
+  devIndicators: {
+    autoPrerender: false,
+  },
+  pwa: {
+    dest: "public",
+  },
 };
+
+module.exports =
+  process.env.NODE_ENV === "development" ? settings : withPWA(settings);
