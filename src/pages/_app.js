@@ -47,14 +47,10 @@ function App({ Component, pageProps, session }) {
             &#9776;
           </div>
           <Head>
-            <meta charSet="utf-8" />
             <meta
               name="viewport"
-              content="width=device-width, initial-scale=1"
+              content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
             />
-            <meta name="theme-color" content="#151c3c" />
-            <meta name="description" content="Spotify All In One." />
-            <link rel="icon" href="/favicon.ico" />
             <link
               rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.css"

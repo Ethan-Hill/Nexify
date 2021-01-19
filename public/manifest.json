@@ -1,0 +1,8 @@
+{
+  "name": "Nexify",
+  "short_name": "Nexify",
+  "lang": "en-GB",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#151c3c"
+}
