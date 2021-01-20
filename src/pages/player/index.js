@@ -1,23 +1,22 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-const UserInfo = dynamic(() => import("../../components/Profile/UserInfo.js"));
 const Switch = dynamic(() => import("../../components/Switch.js"));
 const Loading = dynamic(() => import("../../components/Loading.js"));
 const Protected = dynamic(() => import("../../components/Protected.js"));
+const CurrentlyPlaying = dynamic(() =>
+  import("../../components/Player/CurrentlyPlaying/CurrentlyPlaying")
+);
+
+const PlayerPanel = dynamic(() =>
+  import("../../components/Player/PlayerPanel/PlayerPanel")
+);
 import { useSession, getSession } from "next-auth/client";
 import { useEffect } from "react";
 
-function Player() {
+function Player({ currentTrack, currentDevice }) {
   const [session, loading] = useSession();
-
   const Router = useRouter();
-
-  useEffect(() => {
-    if (!session) {
-      Router.push({ pathname: "/", query: { error: "Not Logged In" } });
-    }
-  }, []);
 
   if (loading) {
     return (
@@ -34,7 +33,7 @@ function Player() {
     return (
       <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
         <Head>
-          <title>Profile</title>
+          <title>Player</title>
           <link
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.css"
@@ -48,9 +47,11 @@ function Player() {
             href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/themes/dark.css"
           />
         </Head>
-        <main className="flex flex-col items-center justify-center flex-1 w-8/12 text-center">
-          <UserInfo user={session.user} />
+        <main className="flex flex-col items-center justify-center flex-1 w-8/12">
+          <CurrentlyPlaying track={currentTrack} />
+          <PlayerPanel track={currentTrack} device={currentDevice} />
           <Switch />
+          <h1>Player</h1>
         </main>
       </div>
     );
@@ -59,12 +60,37 @@ function Player() {
   }
 }
 
-Player.getInitialProps = async (context) => {
+export default async function getServerSideProps(context) {
   const session = await getSession(context);
+
+  if (!session) {
+    ctx.res.writeHead(302, { Location: "/" });
+    ctx.res.end();
+    return {};
+  }
+
+  spotifyApi.setAccessToken(session.user.accessToken);
+
+  const currentTrack = await spotifyApi.getMyCurrentPlayingTrack().then(
+    function (data) {
+      data.json();
+    },
+    function (err) {
+      console.log("Something went wrong!", err);
+    }
+  );
+
+  const currentDevice = await spotifyApi.getMyDevices().then(
+    function (data) {
+      data.json();
+    },
+    function (err) {
+      console.log("Something went wrong!", err);
+    }
+  );
 
   return {
     session,
+    playback: { currentTrack, currentDevice },
   };
-};
-
-export default Player;
+}
