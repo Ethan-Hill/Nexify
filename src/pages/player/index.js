@@ -1,6 +1,14 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+
+const SpotifyWebApi = require("spotify-web-api-node");
+const spotifyApi = new SpotifyWebApi({
+  clientId: process.env.SPOTIFY_CLIENT_ID,
+  clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+  redirectUri: "https://localhost:3000/api/auth/callback/spotify",
+});
+
 const Switch = dynamic(() => import("../../components/Switch.js"));
 const Loading = dynamic(() => import("../../components/Loading.js"));
 const Protected = dynamic(() => import("../../components/Protected.js"));
@@ -15,8 +23,8 @@ import { useSession, getSession } from "next-auth/client";
 import { useEffect } from "react";
 
 function Player({ currentTrack, currentDevice }) {
-  const [session, loading] = useSession();
   const Router = useRouter();
+  const [session, loading] = useSession();
 
   if (loading) {
     return (
@@ -60,20 +68,12 @@ function Player({ currentTrack, currentDevice }) {
   }
 }
 
-export default async function getServerSideProps(context) {
-  const session = await getSession(context);
-
-  if (!session) {
-    ctx.res.writeHead(302, { Location: "/" });
-    ctx.res.end();
-    return {};
-  }
-
+export default async function getStaticProps(context) {
   spotifyApi.setAccessToken(session.user.accessToken);
 
   const currentTrack = await spotifyApi.getMyCurrentPlayingTrack().then(
     function (data) {
-      data.json();
+      return data.json();
     },
     function (err) {
       console.log("Something went wrong!", err);
@@ -82,15 +82,14 @@ export default async function getServerSideProps(context) {
 
   const currentDevice = await spotifyApi.getMyDevices().then(
     function (data) {
-      data.json();
+      return data.json();
     },
     function (err) {
       console.log("Something went wrong!", err);
     }
   );
-
   return {
-    session,
+    session: await getSession(context),
     playback: { currentTrack, currentDevice },
   };
 }
