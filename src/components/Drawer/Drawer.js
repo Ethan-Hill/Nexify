@@ -1,11 +1,11 @@
 import React from "react";
-
+import wrapCustomElement from "@shoelace-style/react-wrapper";
 import dynamic from "next/dynamic";
+
 const DrawerItem = dynamic(() => import("./Items/DrawerItem.js"));
 const Login = dynamic(() => import("../Auth/Login"));
 const Logout = dynamic(() => import("../Auth/Logout"));
-
-import wrapCustomElement from "@shoelace-style/react-wrapper";
+const UserImage = dynamic(() => import("./Items/UserDrawerImage"));
 const ShoelaceDrawer = wrapCustomElement("sl-drawer");
 const ShoelaceMenuDivider = wrapCustomElement("sl-menu-divider");
 
@@ -15,13 +15,15 @@ export default function Drawer({ session }) {
       <div>
         <ShoelaceDrawer className="drawer-placement-left" placement="left">
           <div className="flex flex-col items-center w-full h-full ">
-            <Logout />
-            <ShoelaceMenuDivider
-              style={{ width: "200px", marginTop: "24px" }}
-            />
+            <UserImage user={session.user} />
+
             <DrawerItem title="Home" link="/" />
             <DrawerItem title="Profile" link="/profile" />
             <DrawerItem title="Player" link="/player" />
+            <ShoelaceMenuDivider
+              style={{ width: "200px", marginBottom: "24px" }}
+            />
+            <Logout />
           </div>
         </ShoelaceDrawer>
       </div>

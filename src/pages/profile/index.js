@@ -53,13 +53,17 @@ function Profile() {
         </main>
       </div>
     );
-  } else {
-    return <Protected />;
   }
 }
 
 Profile.getInitialProps = async (context) => {
   const session = await getSession(context);
+
+  if (!session) {
+    ctx.res.writeHead(302, { Location: "/" });
+    ctx.res.end();
+    return {};
+  }
 
   return {
     session,

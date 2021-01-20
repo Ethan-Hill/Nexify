@@ -12,7 +12,6 @@ const Logout = dynamic(() => import("../Auth/Logout"));
 export default function UserInfo({ user }) {
   return (
     <div className="my-4 overflow-hidden transition duration-500 ease-in-out transform rounded-lg shadow-2xl bg-backgroundBlue dark:bg-white hover:scale-105">
-      {" "}
       <div className="flex w-full h-64 lg:h-full lg:w-64 lg:flex-col lg:justify-center ">
         <UserImage src={user.profile} />
         {/* <UserActivity type={user.profile.product} /> */}
