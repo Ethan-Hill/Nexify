@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 const HeroTitle = dynamic(() => import("../Index/HeroTitle.js"));
 const Switch = dynamic(() => import("../Switch.js"));
 
-export default function Error({ message }) {
+export default function Error({ errorCode, Message }) {
   return (
     <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
       <Head>
@@ -18,9 +18,9 @@ export default function Error({ message }) {
           className="w-full alert-closable"
         >
           <sl-icon slot="icon" name="exclamation-octagon"></sl-icon>
-          <strong>A Error Occured!</strong>
+          <strong>An error occurred!</strong>
           <br />
-          {message}
+          {errorCode} - {Message}
         </sl-alert>
       </div>
 

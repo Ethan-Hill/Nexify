@@ -12,6 +12,8 @@ const spotifyApi = new SpotifyWebApi({
 const Switch = dynamic(() => import("../../components/Switch.js"));
 const Loading = dynamic(() => import("../../components/Loading.js"));
 const Protected = dynamic(() => import("../../components/Protected.js"));
+const Error = dynamic(() => import("../../components/Error"));
+
 const CurrentlyPlaying = dynamic(() =>
   import("../../components/Player/CurrentlyPlaying/CurrentlyPlaying")
 );
@@ -22,9 +24,13 @@ const PlayerPanel = dynamic(() =>
 import { useSession, getSession } from "next-auth/client";
 import { useEffect } from "react";
 
-function Player({ currentTrack, currentDevice }) {
+function Player({ currentTrack, currentDevice, errorCode }) {
   const Router = useRouter();
   const [session, loading] = useSession();
+
+  if (errorCode) {
+    return <Error statusCode={errorCode} errorMessage={errorMessage} />;
+  }
 
   if (loading) {
     return (
@@ -68,7 +74,12 @@ function Player({ currentTrack, currentDevice }) {
   }
 }
 
-export default async function getStaticProps(context) {
+export default async function getServerSideProps(context) {
+  const [session] = await getSession(context);
+  if (!session) {
+    return { props: { errorCode: 401, errorMessage: "Not Authorized" } };
+  }
+
   spotifyApi.setAccessToken(session.user.accessToken);
 
   const currentTrack = await spotifyApi.getMyCurrentPlayingTrack().then(
@@ -76,7 +87,7 @@ export default async function getStaticProps(context) {
       return data.json();
     },
     function (err) {
-      console.log("Something went wrong!", err);
+      console.log("Something went wrong!", err.data.error);
     }
   );
 
@@ -85,11 +96,11 @@ export default async function getStaticProps(context) {
       return data.json();
     },
     function (err) {
-      console.log("Something went wrong!", err);
+      console.log("Something went wrong!", err.data.error);
     }
   );
   return {
-    session: await getSession(context),
+    session,
     playback: { currentTrack, currentDevice },
   };
 }

@@ -37,9 +37,9 @@ export default function Drawer({ session }) {
             <ShoelaceMenuDivider
               style={{ width: "200px", marginTop: "24px" }}
             />
-            <DrawerItem title="Home" link="/?error=Not+Logged+In" />
-            <DrawerItem title="Profile" link="/?error=Not+Logged+In" />
-            <DrawerItem title="Player" link="/?error=Not+Logged+In" />
+            <DrawerItem title="Home" link="/" />
+            <DrawerItem title="Profile" link="/profile" />
+            <DrawerItem title="Player" link="/player" />
           </div>
         </ShoelaceDrawer>
       </div>

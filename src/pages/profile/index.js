@@ -1,24 +1,18 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
+import { useSession, getSession } from "next-auth/client";
+
 const UserInfo = dynamic(() => import("../../components/Profile/UserInfo.js"));
 const Switch = dynamic(() => import("../../components/Switch.js"));
 const Loading = dynamic(() => import("../../components/Loading.js"));
-const Protected = dynamic(() => import("../../components/Protected.js"));
-import { useSession, getSession } from "next-auth/client";
-import { useEffect } from "react";
+const Error = dynamic(() => import("../../components/Error"));
 
-function Profile() {
+function Profile({ errorCode, errorMessage }) {
   const [session, loading] = useSession();
-  const Router = useRouter();
 
-  useEffect(() => {
-    if (!session) {
-      Router.push({ pathname: "/", query: { error: "Not Logged In" } });
-    }
-  }, []);
-
-  if (loading) {
+  if (errorCode) {
+    return <Error statusCode={errorCode} errorMessage={errorMessage} />;
+  } else if (loading) {
     return (
       <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
         <Head>
@@ -56,18 +50,14 @@ function Profile() {
   }
 }
 
-Profile.getInitialProps = async (context) => {
-  const session = await getSession(context);
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx);
 
   if (!session) {
-    ctx.res.writeHead(302, { Location: "/" });
-    ctx.res.end();
-    return {};
+    return { props: { errorCode: 401, errorMessage: "Not Authorized" } };
   }
 
-  return {
-    session,
-  };
-};
+  return { props: {} };
+}
 
 export default Profile;

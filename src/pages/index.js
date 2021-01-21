@@ -1,27 +1,38 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
-const Loading = dynamic(() => import("../components/Loading.js"));
-const Normal = dynamic(() => import("../components/Home/Normal.js"));
-const Success = dynamic(() => import("../components/Home/Success.js"));
 const Error = dynamic(() => import("../components/Home/Error.js"));
+const HeroTitle = dynamic(() => import("../components/Index/HeroTitle"));
+const Switch = dynamic(() => import("../components/Switch"));
 
-export default function Home({ error, success }) {
-  if (!error && !success) {
-    return <Normal />;
-  } else if (success) {
-    return <Success message={success} />;
+export default function Home({ statusCode, errorMessage }) {
+  if (!statusCode) {
+    return (
+      <div>
+        <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
+          <Head>
+            <title>Home</title>
+          </Head>
+          <main className="flex flex-col items-center justify-center flex-1 text-center">
+            <HeroTitle />
+            <Switch />
+          </main>
+        </div>
+      </div>
+    );
   } else {
-    return <Error message={error} />;
+    return <Error errorCode={statusCode} Message={errorMessage} />;
   }
 }
 
 export async function getServerSideProps({ query }) {
-  const { error, success } = query;
-  if (error) {
-    return { props: { error } };
+  const { errorCode } = query;
+
+  switch (errorCode) {
+    case "404":
+      return { props: { statusCode: 404, errorMessage: "Page not found" } };
+    case "401":
+      return { props: { statusCode: 401, errorMessage: "Not Authorized" } };
+    default:
+      return { props: { statusCode: null } };
   }
-  if (success) {
-    return { props: { success } };
-  }
-  return { props: { error: null, success: null } };
 }
