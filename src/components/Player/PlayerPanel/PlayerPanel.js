@@ -4,7 +4,7 @@ import wrapCustomElement from "@shoelace-style/react-wrapper";
 import { useRouter } from "next/router";
 
 const CurrentSong = dynamic(() => import("./Items/CurrentSong"));
-const PlayerController = dynamic(() => import("./Items/Playercontroller"));
+const PlayerController = dynamic(() => import("./Items/PlayerController"));
 const PlayerVolume = dynamic(() => import("./Items/PlayerVolume"));
 const ShoelaceButton = wrapCustomElement("sl-button");
 const ShoelaceIcon = wrapCustomElement("sl-icon");

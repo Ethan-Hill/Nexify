@@ -1,6 +1,7 @@
 import "tailwindcss/tailwind.css";
 import { ThemeProvider } from "next-themes";
 import SiteLayout from "../components/SiteLayout";
+import CustomEls from "../components/CustomEls"
 import Router from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
@@ -9,16 +10,7 @@ import Head from "next/head";
 import { useEffect, useLayoutEffect, useRef } from "react";
 import "@shoelace-style/shoelace/dist/shoelace/shoelace.css";
 import "@shoelace-style/shoelace/themes/dark.css";
-import {
-  setAssetPath,
-  SlButton,
-  SlSpinner,
-  SlTheme,
-  SlIcon,
-  SlDrawer,
-  SlMenuDivider,
-  SlRange,
-} from "@shoelace-style/shoelace";
+
 setOptions({ site: "http://localhost:3000" });
 
 require("typeface-work-sans");
@@ -27,26 +19,6 @@ Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-function CustomEls({ URL }) {
-  const customEls = useRef(false);
-
-  useLayoutEffect(() => {
-    if (customEls.current) {
-      return;
-    }
-    setAssetPath(`${URL}/static/static`);
-    customElements.define("sl-button", SlButton);
-    customElements.define("sl-spinner", SlSpinner);
-    customElements.define("sl-theme", SlTheme);
-    customElements.define("sl-icon", SlIcon);
-    customElements.define("sl-drawer", SlDrawer);
-    customElements.define("sl-menu-divider", SlMenuDivider);
-    customElements.define("sl-range", SlRange);
-    customEls.current = true;
-  }, [URL, customEls]);
-
-  return null;
-}
 
 function App({ Component, pageProps, session, URL }) {
   return (
