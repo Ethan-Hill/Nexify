@@ -1,6 +1,8 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import axios from "axios";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 
 const SpotifyWebApi = require("spotify-web-api-node");
 const spotifyApi = new SpotifyWebApi({
@@ -25,53 +27,85 @@ const PlayerPanel = dynamic(() =>
 import { useSession, getSession } from "next-auth/client";
 import { useEffect } from "react";
 
-function PlayerLayout({children}) {
-	return (
-		<div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
-        <Head>
-          <title>Player</title>
-        </Head>
-		{children}
-      </div>
-	)
+function PlayerLayout({ children }) {
+  return (
+    <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
+      <Head>
+        <title>Player</title>
+      </Head>
+      {children}
+    </div>
+  );
 }
 
-function Player({ currentTrack, currentDevice, errorCode }) {
+function Player(props, { errorCode, errorMessage }) {
   const Router = useRouter();
   const [session, loading] = useSession();
 
-  useEffect(() =>{
-	console.log(currentDevice);
-  },[currentDevice])
+  const fetcher = (url) =>
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${session.user.accessToken}`,
+        },
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  const initialData = props.currentTrack;
+
+  const { data: currentTrack, error } = useSWR(
+    "https://api.spotify.com/v1/me/player",
+    fetcher,
+    { initialData, refreshInterval: 3000 }
+  );
+
+  if (error) {
+    console.log(error);
+  }
 
   if (errorCode) {
     return <Error statusCode={errorCode} errorMessage={errorMessage} />;
   }
 
-  if(!currentTrack || !currentDevice) {
-	 return <h1>No device or track</h1>
+  if (!currentTrack.item || !currentTrack.device) {
+    return (
+      <PlayerLayout>
+        <main className="flex flex-col items-center justify-center flex-1 text-center">
+          <h1 className="text-3xl">Start playing something!</h1>
+        </main>
+      </PlayerLayout>
+    );
   }
 
   if (loading) {
     return (
-		<PlayerLayout>
+      <PlayerLayout>
         <main className="flex flex-col items-center justify-center flex-1 text-center">
           <Loading />
         </main>
-		</PlayerLayout>
+      </PlayerLayout>
     );
-  } else if (session) {
+  }
+  if (session) {
     return (
-		<PlayerLayout>
+      <PlayerLayout>
         <main className="flex flex-col items-center justify-center flex-1 w-8/12">
           <CurrentlyPlaying track={currentTrack} />
-          <PlayerPanel track={currentTrack} device={currentDevice.devices} />
+          {
+            //Check if message failed
+            session.user.profile.product === "premium" ? (
+              <PlayerPanel track={currentTrack} device={currentTrack.device} />
+            ) : null
+          }
           <Switch />
         </main>
       </PlayerLayout>
     );
-  } else {
-    return <Protected />;
   }
 }
 
@@ -82,28 +116,21 @@ export async function getServerSideProps(context) {
     return { props: { errorCode: 401, errorMessage: "Not Authorized" } };
   }
 
-  spotifyApi.setAccessToken(session.user.accessToken);
+  const fetcher = (url) =>
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${session.user.accessToken}`,
+        },
+      })
+      .then((res) => {
+        return res.data;
+      });
 
-  const currentTrack = await spotifyApi.getMyCurrentPlayingTrack().then(
-    function (data) {
-      return data.body;
-    },
-    function (err) {
-      console.log("Something went wrong!", err.data.error);
-    }
-  );
-
-  const currentDevice = await spotifyApi.getMyDevices().then(
-    function (data) {
-      return data.body;
-    },
-    function (err) {
-      console.log("Something went wrong!", err.data.error);
-    }
-  );
+  const currentTrack = await fetcher("https://api.spotify.com/v1/me/player");
 
   return {
-    props: { session, currentTrack, currentDevice },
+    props: { session, currentTrack },
   };
 }
 

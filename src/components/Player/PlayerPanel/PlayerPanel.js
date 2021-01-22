@@ -28,7 +28,7 @@ export default function PlayerPanel({ track, device }) {
           name={track.item.name}
         />
         
-        <PlayerVolume amount={device[0].volume_percent} />
+        <PlayerVolume  amount={device.volume_percent} />
       </div>
     </div>
   );

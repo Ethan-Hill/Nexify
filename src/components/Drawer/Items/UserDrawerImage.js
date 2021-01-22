@@ -11,12 +11,16 @@ export default function DrawerItem({ user }) {
 
   return (
     <div className="flex items-center justify-center w-full h-16 mb-6">
-      <img
-        src={user.image}
-        alt="USerImage"
-        className="h-16 mr-2 rounded-full"
-      />
-      <h1 className="ml-2 text-lg font-semibold">{user.name}</h1>
+	  { //Check if message failed
+        (user.image)
+          ? <img
+		  src={user.image}
+		  alt="UserImage"
+		  className="h-16 mr-2 rounded-full"
+		/>
+          : null
+      }
+      <h1 className="ml-2 text-lg font-semibold">Welcome {user.name}</h1>
     </div>
   );
 }

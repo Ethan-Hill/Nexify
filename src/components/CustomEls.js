@@ -11,6 +11,7 @@ import {
 	SlDrawer,
 	SlMenuDivider,
 	SlRange,
+	SlAlert
   } from "@shoelace-style/shoelace";
 
 function CustomEls({ URL }) {
@@ -28,6 +29,7 @@ function CustomEls({ URL }) {
 	  customElements.define("sl-drawer", SlDrawer);
 	  customElements.define("sl-menu-divider", SlMenuDivider);
 	  customElements.define("sl-range", SlRange);
+	  customElements.define("sl-alert", SlAlert);
 	  customEls.current = true;
 	}, [URL, customEls]);
   

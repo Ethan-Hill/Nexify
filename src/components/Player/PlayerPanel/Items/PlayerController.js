@@ -2,7 +2,7 @@ import React from "react";
 
 export default function CurrentSong({ src, name }) {
   return (
-    <div className="flex items-center ">
+    <div className="flex items-center justify-center">
       <img className="object-cover object-center h-16 ml-5" src={src} />;
       <div className="flex flex-col justify-start mr-2">
         <h1 className="text-2xl font-semibold text-white dark:text-gray-700 ">

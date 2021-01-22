@@ -9,7 +9,7 @@ export default function Error({ errorCode, Message }) {
       <Head>
         <title>Home</title>
       </Head>
-      <div className="absolute top-0 right-0 p-3">
+      <div className="absolute right-0 p-3 top-15">
         <sl-alert
           type="danger"
           closable
