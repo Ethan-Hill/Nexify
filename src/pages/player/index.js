@@ -21,12 +21,17 @@ const CurrentlyPlaying = dynamic(() =>
 const PlayerPanel = dynamic(() =>
   import("../../components/Player/PlayerPanel/PlayerPanel")
 );
+
 import { useSession, getSession } from "next-auth/client";
 import { useEffect } from "react";
 
 function Player({ currentTrack, currentDevice, errorCode }) {
   const Router = useRouter();
   const [session, loading] = useSession();
+
+  useEffect(() =>{
+	console.log(currentDevice);
+  },[currentDevice])
 
   if (errorCode) {
     return <Error statusCode={errorCode} errorMessage={errorMessage} />;
@@ -63,7 +68,7 @@ function Player({ currentTrack, currentDevice, errorCode }) {
         </Head>
         <main className="flex flex-col items-center justify-center flex-1 w-8/12">
           <CurrentlyPlaying track={currentTrack} />
-          <PlayerPanel track={currentTrack} device={currentDevice} />
+          <PlayerPanel track={currentTrack} device={currentDevice.devices} />
           <Switch />
           <h1>Player</h1>
         </main>
@@ -74,8 +79,9 @@ function Player({ currentTrack, currentDevice, errorCode }) {
   }
 }
 
-export default async function getServerSideProps(context) {
-  const [session] = await getSession(context);
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
   if (!session) {
     return { props: { errorCode: 401, errorMessage: "Not Authorized" } };
   }
@@ -84,7 +90,7 @@ export default async function getServerSideProps(context) {
 
   const currentTrack = await spotifyApi.getMyCurrentPlayingTrack().then(
     function (data) {
-      return data.json();
+      return data.body;
     },
     function (err) {
       console.log("Something went wrong!", err.data.error);
@@ -93,14 +99,16 @@ export default async function getServerSideProps(context) {
 
   const currentDevice = await spotifyApi.getMyDevices().then(
     function (data) {
-      return data.json();
+      return data.body;
     },
     function (err) {
       console.log("Something went wrong!", err.data.error);
     }
   );
+
   return {
-    session,
-    playback: { currentTrack, currentDevice },
+    props: { session, currentTrack, currentDevice },
   };
 }
+
+export default Player;
