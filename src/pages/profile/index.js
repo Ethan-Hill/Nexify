@@ -7,45 +7,42 @@ const Switch = dynamic(() => import("../../components/Switch.js"));
 const Loading = dynamic(() => import("../../components/Loading.js"));
 const Error = dynamic(() => import("../../components/Error"));
 
+function ProfileLayout({children}) {
+	return (
+		<div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
+        <Head>
+          <title>Profile</title>
+        </Head>
+		{children}
+      </div>
+	)
+}
+
 function Profile({ errorCode, errorMessage }) {
   const [session, loading] = useSession();
 
   if (errorCode) {
     return <Error statusCode={errorCode} errorMessage={errorMessage} />;
-  } else if (loading) {
+  }  
+  
+  if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
-        <Head>
-          <title>Profile</title>
-        </Head>
+        <ProfileLayout>
         <main className="flex flex-col items-center justify-center flex-1 text-center">
           <Loading />
         </main>
-      </div>
+      </ProfileLayout>
     );
-  } else if (session) {
+  }  
+  
+  if (session) {
     return (
-      <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
-        <Head>
-          <title>Profile</title>
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.css"
-          />
-          <script
-            type="module"
-            src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.esm.js"
-          ></script>
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/themes/dark.css"
-          />
-        </Head>
+     <ProfileLayout>
         <main className="flex flex-col items-center justify-center flex-1 w-8/12 text-center">
           <UserInfo user={session.user} />
           <Switch />
         </main>
-      </div>
+	 </ProfileLayout>
     );
   }
 }

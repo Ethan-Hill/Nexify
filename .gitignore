@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /_static
+/static/icons
 
 # testing
 /coverage

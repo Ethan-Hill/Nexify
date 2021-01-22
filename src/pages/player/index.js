@@ -25,6 +25,17 @@ const PlayerPanel = dynamic(() =>
 import { useSession, getSession } from "next-auth/client";
 import { useEffect } from "react";
 
+function PlayerLayout({children}) {
+	return (
+		<div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
+        <Head>
+          <title>Player</title>
+        </Head>
+		{children}
+      </div>
+	)
+}
+
 function Player({ currentTrack, currentDevice, errorCode }) {
   const Router = useRouter();
   const [session, loading] = useSession();
@@ -37,42 +48,28 @@ function Player({ currentTrack, currentDevice, errorCode }) {
     return <Error statusCode={errorCode} errorMessage={errorMessage} />;
   }
 
+  if(!currentTrack || !currentDevice) {
+	 return <h1>No device or track</h1>
+  }
+
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
-        <Head>
-          <title>Profile</title>
-        </Head>
+		<PlayerLayout>
         <main className="flex flex-col items-center justify-center flex-1 text-center">
           <Loading />
         </main>
-      </div>
+		</PlayerLayout>
     );
   } else if (session) {
     return (
-      <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
-        <Head>
-          <title>Player</title>
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.css"
-          />
-          <script
-            type="module"
-            src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/dist/shoelace/shoelace.esm.js"
-          ></script>
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.25/themes/dark.css"
-          />
-        </Head>
+		<PlayerLayout>
         <main className="flex flex-col items-center justify-center flex-1 w-8/12">
           <CurrentlyPlaying track={currentTrack} />
           <PlayerPanel track={currentTrack} device={currentDevice.devices} />
           <Switch />
           <h1>Player</h1>
         </main>
-      </div>
+      </PlayerLayout>
     );
   } else {
     return <Protected />;
