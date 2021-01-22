@@ -18,7 +18,7 @@ export default function Switch() {
   };
 
   return (
-    <div className="absolute bottom-0 right-0 p-3" onClick={toggleLight}>
+    <div className="absolute top-0 right-0 p-3" onClick={toggleLight}>
       <sl-theme name={theme === "light" ? "dark" : "light"}>
         <ShoelaceButton>
           <ShoelaceIcon name="lightning-fill"></ShoelaceIcon>

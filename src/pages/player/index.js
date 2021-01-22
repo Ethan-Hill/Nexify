@@ -67,7 +67,6 @@ function Player({ currentTrack, currentDevice, errorCode }) {
           <CurrentlyPlaying track={currentTrack} />
           <PlayerPanel track={currentTrack} device={currentDevice.devices} />
           <Switch />
-          <h1>Player</h1>
         </main>
       </PlayerLayout>
     );
