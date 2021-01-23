@@ -61,7 +61,10 @@ function Player(props, { errorCode, errorMessage }) {
   const { data: currentTrack, error } = useSWR(
     "https://api.spotify.com/v1/me/player",
     fetcher,
-    { initialData, refreshInterval: 3000 }
+    {
+      initialData,
+      refreshInterval: 1500,
+    }
   );
 
   if (error) {
