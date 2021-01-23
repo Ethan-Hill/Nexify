@@ -4,7 +4,7 @@ export default function CurrentSong({ src, name, artists }) {
   const artist_names = artists.map((artist) => artist.name).join(", ");
 
   return (
-    <div className="flex items-center flex-1">
+    <div className="flex items-center flex-1 md:hidden">
       <img className="object-cover object-center h-16 ml-5" src={src} />;
       <div className="flex flex-col justify-start ml-2">
         <h1 className="text-2xl font-semibold text-white dark:text-gray-700 ">

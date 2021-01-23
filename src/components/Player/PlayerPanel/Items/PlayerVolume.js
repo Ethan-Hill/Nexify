@@ -28,7 +28,7 @@ export default function CurrentSong({ amount }) {
   }, []);
 
   return (
-    <div className="flex items-center justify-end flex-1 sm:hidden">
+    <div className="flex items-center justify-end flex-1 md:hidden">
       <div className="flex justify-center w-64 mr-2">
         <sl-range
           min="0"
