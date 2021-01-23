@@ -18,17 +18,15 @@ export default function PlayerPanel({ track, device }) {
 
   return (
     <div className="absolute bottom-0 w-screen h-24 bg-backgroundBlue dark:bg-white ">
-      <div className="flex justify-between w-full h-full ">
+      <div className="flex w-full h-full sm:justify-center">
         <CurrentSong
           src={track.item.album.images[0].url}
           name={track.item.name}
+          artists={track.item.artists}
         />
-        <PlayerController
-          src={track.item.album.images[0].url}
-          name={track.item.name}
-        />
-        
-        <PlayerVolume  amount={device.volume_percent} />
+        <PlayerController isPlaying={track.is_playing} />
+
+        <PlayerVolume amount={device.volume_percent} />
       </div>
     </div>
   );

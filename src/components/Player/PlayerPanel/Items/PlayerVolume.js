@@ -9,14 +9,18 @@ export default function CurrentSong({ amount }) {
     const change = document.getElementById("range");
     change.addEventListener("sl-change", (e) => {
       axios
-        .put("https://api.spotify.com/v1/me/player/volume", {}, {
-          headers: {
-            Authorization: `Bearer ${session.user.accessToken}`,
-          },
-          params: {
-            volume_percent: e.target.value,
-          },
-        })
+        .put(
+          "https://api.spotify.com/v1/me/player/volume",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${session.user.accessToken}`,
+            },
+            params: {
+              volume_percent: e.target.value,
+            },
+          }
+        )
         .then((res) => {
           return res.data;
         });
@@ -24,7 +28,7 @@ export default function CurrentSong({ amount }) {
   }, []);
 
   return (
-    <div className="flex items-center ">
+    <div className="flex items-center justify-end flex-1 sm:hidden">
       <div className="flex justify-center w-64 mr-2">
         <sl-range
           min="0"
