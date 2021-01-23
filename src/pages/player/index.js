@@ -53,7 +53,7 @@ function Player(props, { errorCode, errorMessage }) {
         return res.data;
       })
       .catch((err) => {
-        console.log(err);
+        console.log("error on player req");
       });
 
   const initialData = props.currentTrack;
@@ -63,7 +63,7 @@ function Player(props, { errorCode, errorMessage }) {
     fetcher,
     {
       initialData,
-      refreshInterval: 1500,
+      refreshInterval: 2500,
     }
   );
 

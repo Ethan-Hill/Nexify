@@ -33,13 +33,17 @@ const options = {
       return Promise.resolve(token);
     },
     session: async (session, token) => {
-      const profile = await axios.get("https://api.spotify.com/v1/me", {
-        headers: {
-          Authorization: `Bearer ${token.accessToken}`,
-        },
-      });
+      const profile = await axios
+        .get("https://api.spotify.com/v1/me", {
+          headers: {
+            Authorization: `Bearer ${token.accessToken}`,
+          },
+        })
+        .then((response) => (session.user.profile = response.data))
+        .catch(() => {
+          return;
+        });
 
-      session.user.profile = profile.data;
       session.user.accessToken = token.accessToken;
       session.user.refreshToken = token.refreshToken;
       return Promise.resolve(session);
