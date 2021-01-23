@@ -6,14 +6,8 @@ import PlaybackNext from "./PlayerControllerItems/PlaybackNext";
 import PlaybackPrevious from "./PlayerControllerItems/PlaybackPrevious";
 import { useSession } from "next-auth/client";
 
-export default function CurrentSong(props) {
-  const [isPlaying, setIsPlaying] = useState(props.isPlaying);
-
+export default function CurrentSong({ isPlaying }) {
   const [session] = useSession();
-
-  useEffect(() => {
-    console.log(isPlaying);
-  }, [isPlaying]);
 
   const pausePlayback = () => {
     axios
@@ -27,7 +21,6 @@ export default function CurrentSong(props) {
         }
       )
       .then((res) => {
-        setIsPlaying(false);
         return res.data;
       })
       .catch((err) => {
@@ -47,7 +40,6 @@ export default function CurrentSong(props) {
         }
       )
       .then((res) => {
-        setIsPlaying(true);
         return res.data;
       })
       .catch((err) => {
