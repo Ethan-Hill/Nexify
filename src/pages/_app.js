@@ -20,9 +20,16 @@ Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
+export function reportWebVitals(metric) {
+  console.log(metric);
+}
+
 function App({ Component, pageProps, session, URL }) {
   return (
-    <Provider session={session}>
+    <Provider
+      session={session}
+      options={{ clientMaxAge: 60 * 60, keepAlive: 5 * 60 }}
+    >
       {process.browser && <CustomEls URL={URL} />}
 
       <Head>

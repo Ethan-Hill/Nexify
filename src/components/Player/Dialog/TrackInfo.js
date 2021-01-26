@@ -15,7 +15,7 @@ export default function TrackInfo({ track }) {
           ))}
 
           {track.item.artists.map((artist) => (
-            <sl-tab-panel name={artist.id}>
+            <sl-tab-panel name={artist.id} key={artist.id}>
               <div className="flex flex-col items-center">
                 <InfoProperty title="Artist" name={artist.name} />
                 <InfoProperty title="ID" name={artist.id} />
