@@ -10,7 +10,7 @@ export default function CurrentTrackInfo() {
 
   return (
     <div>
-      <div className="absolute text-2xl bottom-3">
+      <div className="text-2xl ">
         <sl-theme name="dark">
           <sl-icon-button
             name="info-circle-fill"

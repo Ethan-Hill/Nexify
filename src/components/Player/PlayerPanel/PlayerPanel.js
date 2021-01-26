@@ -27,6 +27,7 @@ export default function PlayerPanel({ track, device }) {
         <PlayerController
           isPlaying={track.is_playing}
           isShuffle={track.shuffle_state}
+          isRepeat={track.repeat_state}
         />
 
         <PlayerVolume amount={device.volume_percent} />

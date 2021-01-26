@@ -7,8 +7,9 @@ import PlaybackPause from "./PlayerControllerItems/PlaybackPause";
 import PlaybackPrevious from "./PlayerControllerItems/PlaybackPrevious";
 import PlaybackResume from "./PlayerControllerItems/PlaybackResume";
 import PlaybackShuffle from "./PlayerControllerItems/PlaybackShuffle";
+import PlaybackRepeat from "./PlayerControllerItems/PlaybackRepeat";
 
-export default function CurrentSong({ isPlaying, isShuffle }) {
+export default function CurrentSong({ isPlaying, isShuffle, isRepeat }) {
   const [session] = useSession();
 
   const pausePlayback = () => {
@@ -131,6 +132,70 @@ export default function CurrentSong({ isPlaying, isShuffle }) {
     }
   };
 
+  const repeatToggle = () => {
+    if (isRepeat === "off") {
+      axios
+        .put(
+          "https://api.spotify.com/v1/me/player/repeat",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${session.user.accessToken}`,
+            },
+            params: {
+              state: "context",
+            },
+          }
+        )
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else if (isRepeat === "context") {
+      axios
+        .put(
+          "https://api.spotify.com/v1/me/player/repeat",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${session.user.accessToken}`,
+            },
+            params: {
+              state: "track",
+            },
+          }
+        )
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .put(
+          "https://api.spotify.com/v1/me/player/repeat",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${session.user.accessToken}`,
+            },
+            params: {
+              state: "off",
+            },
+          }
+        )
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   if (isPlaying) {
     return (
       <div className="flex items-center justify-center flex-1">
@@ -142,6 +207,7 @@ export default function CurrentSong({ isPlaying, isShuffle }) {
           <PlaybackPrevious handleClick={previousPlayback} />
           <PlaybackPause handleClick={pausePlayback} />
           <PlaybackNext handleClick={nextPlayback} />
+          <PlaybackRepeat handleClick={repeatToggle} repeatState={isRepeat} />
         </sl-button-group>
       </div>
     );
