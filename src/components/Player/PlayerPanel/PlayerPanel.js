@@ -24,7 +24,10 @@ export default function PlayerPanel({ track, device }) {
           name={track.item.name}
           artists={track.item.artists}
         />
-        <PlayerController isPlaying={track.is_playing} />
+        <PlayerController
+          isPlaying={track.is_playing}
+          isShuffle={track.shuffle_state}
+        />
 
         <PlayerVolume amount={device.volume_percent} />
       </div>

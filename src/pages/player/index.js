@@ -1,6 +1,6 @@
 import axios from "axios";
 import dynamic from "next/dynamic";
-import useSWR from "swr";
+import useSWR, { SWRConfig } from "swr";
 
 import PlayerLayout from "../../components/Layouts/PlayerLayout";
 
@@ -34,9 +34,6 @@ function Player(props, { errorCode, errorMessage }) {
       })
       .then((res) => {
         return res.data;
-      })
-      .catch((err) => {
-        console.log("error on player req");
       });
 
   const initialData = props.currentTrack;
@@ -51,7 +48,7 @@ function Player(props, { errorCode, errorMessage }) {
   );
 
   if (error) {
-    return <Error statusCode={errorCode} errorMessage="Not Authorized" />;
+    return <Error statusCode="401" errorMessage="Not Authorized" />;
   }
 
   if (errorCode) {
@@ -111,6 +108,9 @@ export async function getServerSideProps(context) {
       })
       .then((res) => {
         return res.data;
+      })
+      .catch(() => {
+        return { props: { errorCode: 401, errorMessage: "Not Authorized" } };
       });
 
   const currentTrack = await fetcher("https://api.spotify.com/v1/me/player");

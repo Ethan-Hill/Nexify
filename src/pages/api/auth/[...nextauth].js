@@ -25,6 +25,7 @@ const options = {
     maxAge: 1 * 60 * 60,
   },
   jwt: {
+    maxAge: 1 * 60 * 60,
     secret: process.env.JWT_SCERET,
     encryption: true,
     signingKey:

@@ -6,8 +6,9 @@ import PlaybackNext from "./PlayerControllerItems/PlaybackNext";
 import PlaybackPause from "./PlayerControllerItems/PlaybackPause";
 import PlaybackPrevious from "./PlayerControllerItems/PlaybackPrevious";
 import PlaybackResume from "./PlayerControllerItems/PlaybackResume";
+import PlaybackShuffle from "./PlayerControllerItems/PlaybackShuffle";
 
-export default function CurrentSong({ isPlaying }) {
+export default function CurrentSong({ isPlaying, isShuffle }) {
   const [session] = useSession();
 
   const pausePlayback = () => {
@@ -86,10 +87,58 @@ export default function CurrentSong({ isPlaying }) {
       });
   };
 
+  const shuffleToggle = () => {
+    if (isShuffle) {
+      axios
+        .put(
+          "https://api.spotify.com/v1/me/player/shuffle",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${session.user.accessToken}`,
+            },
+            params: {
+              state: false,
+            },
+          }
+        )
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios
+        .put(
+          "https://api.spotify.com/v1/me/player/shuffle",
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${session.user.accessToken}`,
+            },
+            params: {
+              state: true,
+            },
+          }
+        )
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   if (isPlaying) {
     return (
       <div className="flex items-center justify-center flex-1">
         <sl-button-group>
+          <PlaybackShuffle
+            handleClick={shuffleToggle}
+            shuffleState={isShuffle}
+          />
           <PlaybackPrevious handleClick={previousPlayback} />
           <PlaybackPause handleClick={pausePlayback} />
           <PlaybackNext handleClick={nextPlayback} />
@@ -102,6 +151,10 @@ export default function CurrentSong({ isPlaying }) {
     return (
       <div className="flex items-center justify-center flex-1">
         <sl-button-group>
+          <PlaybackShuffle
+            handleClick={shuffleToggle}
+            shuffleState={isShuffle}
+          />
           <PlaybackPrevious handleClick={previousPlayback} />
           <PlaybackResume handleClick={resumePlayback} />
           <PlaybackNext handleClick={nextPlayback} />
