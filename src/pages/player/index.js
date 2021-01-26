@@ -51,7 +51,7 @@ function Player(props, { errorCode, errorMessage }) {
   );
 
   if (error) {
-    console.log(error);
+    return <Error statusCode={errorCode} errorMessage="Not Authorized" />;
   }
 
   if (errorCode) {
@@ -93,7 +93,6 @@ function Player(props, { errorCode, errorMessage }) {
       </PlayerLayout>
     );
   }
-  return <Protected />;
 }
 
 export async function getServerSideProps(context) {
