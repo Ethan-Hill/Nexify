@@ -4,7 +4,7 @@ export default function PlaybackShuffle({ handleClick, repeatState }) {
       <div className="flex items-center">
         <div className="flex justify-center w-12 mr-2">
           <sl-button type="default" onClick={handleClick}>
-            <sl-icon name="shuffle"></sl-icon>
+            <sl-icon name="arrow-repeat"></sl-icon>
           </sl-button>
         </div>
       </div>
@@ -14,7 +14,7 @@ export default function PlaybackShuffle({ handleClick, repeatState }) {
       <div className="flex items-center">
         <div className="flex justify-center w-12 mr-2">
           <sl-button type="warning" onClick={handleClick}>
-            <sl-icon name="shuffle"></sl-icon>
+            <sl-icon name="arrow-repeat"></sl-icon>
           </sl-button>
         </div>
       </div>
@@ -24,7 +24,7 @@ export default function PlaybackShuffle({ handleClick, repeatState }) {
       <div className="flex items-center">
         <div className="flex justify-center w-12 mr-2">
           <sl-button type="success" onClick={handleClick}>
-            <sl-icon name="shuffle"></sl-icon>
+            <sl-icon name="arrow-repeat"></sl-icon>
           </sl-button>
         </div>
       </div>
