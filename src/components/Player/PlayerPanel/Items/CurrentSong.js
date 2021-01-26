@@ -1,4 +1,5 @@
 import React from "react";
+import CurrentTrackInfo from "../../CurrentlyPlaying/Items/CurrentTrackInfo";
 
 export default function CurrentSong({ src, name, artists }) {
   const artist_names = artists.map((artist) => artist.name).join(", ");
@@ -10,9 +11,12 @@ export default function CurrentSong({ src, name, artists }) {
         <h1 className="text-2xl font-semibold text-white dark:text-gray-700 ">
           {name}
         </h1>
-        <h1 className="text-lg text-white dark:text-gray-700 ">
-          {artist_names}
-        </h1>
+        <div className="flex">
+          <h1 className="text-lg text-white dark:text-gray-700 ">
+            {artist_names}
+          </h1>
+          <CurrentTrackInfo />
+        </div>
       </div>
     </div>
   );

@@ -58,16 +58,6 @@ function Player(props, { errorCode, errorMessage }) {
     return <Error statusCode={errorCode} errorMessage={errorMessage} />;
   }
 
-  if (!currentTrack.item || !currentTrack.device) {
-    return (
-      <PlayerLayout>
-        <main className="flex flex-col items-center justify-center flex-1 text-center">
-          <h1 className="text-3xl">Start playing something!</h1>
-        </main>
-      </PlayerLayout>
-    );
-  }
-
   if (loading) {
     return (
       <PlayerLayout>
@@ -78,6 +68,15 @@ function Player(props, { errorCode, errorMessage }) {
     );
   }
   if (session) {
+    if (!currentTrack.item || !currentTrack.device) {
+      return (
+        <PlayerLayout>
+          <main className="flex flex-col items-center justify-center flex-1 text-center">
+            <h1 className="text-3xl">Start playing something!</h1>
+          </main>
+        </PlayerLayout>
+      );
+    }
     return (
       <PlayerLayout>
         <main className="flex flex-col items-center justify-center flex-1 w-8/12">
@@ -94,6 +93,7 @@ function Player(props, { errorCode, errorMessage }) {
       </PlayerLayout>
     );
   }
+  return <Protected />;
 }
 
 export async function getServerSideProps(context) {
