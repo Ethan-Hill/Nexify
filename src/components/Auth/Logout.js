@@ -1,6 +1,6 @@
+import { signOut } from "next-auth/client";
 import React from "react";
 import wrapCustomElement from "@shoelace-style/react-wrapper";
-import { signOut } from "next-auth/client";
 
 const ShoelaceButton = wrapCustomElement("sl-button");
 const ShoelaceIcon = wrapCustomElement("sl-icon");

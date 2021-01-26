@@ -1,5 +1,5 @@
-import React from "react";
 import dynamic from "next/dynamic";
+import React from "react";
 
 const UserImage = dynamic(() => import("./User/UserImage.js"));
 const UserLocaton = dynamic(() => import("./User/UserFlag.js"));

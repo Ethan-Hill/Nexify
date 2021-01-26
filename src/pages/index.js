@@ -1,5 +1,6 @@
-import Head from "next/head";
 import dynamic from "next/dynamic";
+import Head from "next/head";
+
 const Error = dynamic(() => import("../components/Home/Error.js"));
 const HeroTitle = dynamic(() => import("../components/Index/HeroTitle"));
 const Switch = dynamic(() => import("../components/Switch"));

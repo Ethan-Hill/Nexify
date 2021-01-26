@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import axios from "axios";
 import { useSession } from "next-auth/client";
+import axios from "axios";
 
 export default function CurrentSong({ amount }) {
   const [session] = useSession();

@@ -1,5 +1,6 @@
-import Head from "next/head";
 import dynamic from "next/dynamic";
+import Head from "next/head";
+
 const HeroTitle = dynamic(() => import("../Index/HeroTitle.js"));
 const Switch = dynamic(() => import("../Switch.js"));
 

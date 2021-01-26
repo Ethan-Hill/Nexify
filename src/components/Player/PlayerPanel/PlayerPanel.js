@@ -1,7 +1,7 @@
-import React from "react";
-import dynamic from "next/dynamic";
-import wrapCustomElement from "@shoelace-style/react-wrapper";
 import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import React from "react";
+import wrapCustomElement from "@shoelace-style/react-wrapper";
 
 const CurrentSong = dynamic(() => import("./Items/CurrentSong"));
 const PlayerController = dynamic(() => import("./Items/PlayerController"));

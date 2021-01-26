@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import PlaybackResume from "./PlayerControllerItems/PlaybackResume";
-import PlaybackPause from "./PlayerControllerItems/PlaybackPause";
-import PlaybackNext from "./PlayerControllerItems/PlaybackNext";
-import PlaybackPrevious from "./PlayerControllerItems/PlaybackPrevious";
 import { useSession } from "next-auth/client";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+
+import PlaybackNext from "./PlayerControllerItems/PlaybackNext";
+import PlaybackPause from "./PlayerControllerItems/PlaybackPause";
+import PlaybackPrevious from "./PlayerControllerItems/PlaybackPrevious";
+import PlaybackResume from "./PlayerControllerItems/PlaybackResume";
 
 export default function CurrentSong({ isPlaying }) {
   const [session] = useSession();

@@ -1,6 +1,6 @@
+import dynamic from "next/dynamic";
 import React from "react";
 import wrapCustomElement from "@shoelace-style/react-wrapper";
-import dynamic from "next/dynamic";
 
 const DrawerItem = dynamic(() => import("./Items/DrawerItem.js"));
 const Login = dynamic(() => import("../Auth/Login"));

@@ -1,7 +1,7 @@
 import React from "react";
-import dynamic from "next/dynamic";
-const Drawer = dynamic(() => import("./Drawer/Drawer.js"));
-import DrawerToggle from "./Drawer/Items/DrawerToggle";
+
+import Drawer from "../Drawer/Drawer.js";
+import DrawerToggle from "../Drawer/Items/DrawerToggle";
 
 export default function SiteLayout({ session, children }) {
   return (

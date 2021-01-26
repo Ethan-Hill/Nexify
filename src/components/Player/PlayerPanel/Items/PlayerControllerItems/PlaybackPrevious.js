@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 export default function PlaybackPrevious({ handleClick }) {
   return (
     <div className="flex items-center">

@@ -1,18 +1,14 @@
-import Head from "next/head";
-import dynamic from "next/dynamic";
 import axios from "axios";
-import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
 import useSWR from "swr";
 
-const SpotifyWebApi = require("spotify-web-api-node");
-const spotifyApi = new SpotifyWebApi({
-  clientId: process.env.SPOTIFY_CLIENT_ID,
-  clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-  redirectUri: "https://localhost:3000/api/auth/callback/spotify",
-});
+import PlayerLayout from "../../components/Layouts/PlayerLayout";
 
 const Switch = dynamic(() => import("../../components/Switch.js"));
 const Loading = dynamic(() => import("../../components/Loading.js"));
+const TrackInfo = dynamic(() =>
+  import("../../components/Player/Dialog/TrackInfo")
+);
 const Protected = dynamic(() => import("../../components/Protected.js"));
 const Error = dynamic(() => import("../../components/Error"));
 
@@ -25,21 +21,8 @@ const PlayerPanel = dynamic(() =>
 );
 
 import { useSession, getSession } from "next-auth/client";
-import { useEffect } from "react";
-
-function PlayerLayout({ children }) {
-  return (
-    <div className="flex flex-col items-center justify-center w-screen min-h-screen dark:bg-backgroundBlue bg-backgroundWhite dark:text-white">
-      <Head>
-        <title>Player</title>
-      </Head>
-      {children}
-    </div>
-  );
-}
 
 function Player(props, { errorCode, errorMessage }) {
-  const Router = useRouter();
   const [session, loading] = useSession();
 
   const fetcher = (url) =>
@@ -98,6 +81,7 @@ function Player(props, { errorCode, errorMessage }) {
     return (
       <PlayerLayout>
         <main className="flex flex-col items-center justify-center flex-1 w-8/12">
+          <TrackInfo track={currentTrack} />
           <CurrentlyPlaying track={currentTrack} />
           {
             //Check if message failed

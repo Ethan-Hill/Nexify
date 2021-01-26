@@ -1,7 +1,7 @@
-import React from "react";
-import Head from "next/head";
-import wrapCustomElement from "@shoelace-style/react-wrapper";
 import { useRouter } from "next/router";
+import Head from "next/head";
+import React from "react";
+import wrapCustomElement from "@shoelace-style/react-wrapper";
 
 const ShoelaceButton = wrapCustomElement("sl-button");
 

@@ -1,6 +1,6 @@
-import React from "react";
-import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
+import React from "react";
 import wrapCustomElement from "@shoelace-style/react-wrapper";
 
 const ShoelaceButton = wrapCustomElement("sl-button");

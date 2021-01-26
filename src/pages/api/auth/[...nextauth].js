@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
+import axios from "axios";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import axios from "axios";
 
 const options = {
   providers: [

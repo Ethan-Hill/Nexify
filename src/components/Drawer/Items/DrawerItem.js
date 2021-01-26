@@ -1,10 +1,8 @@
-import React from "react";
-import { Head } from "next/head";
-import wrapCustomElement from "@shoelace-style/react-wrapper";
 import { useRouter } from "next/router";
+import React from "react";
+import wrapCustomElement from "@shoelace-style/react-wrapper";
 
 const ShoelaceButton = wrapCustomElement("sl-button");
-const ShoelaceIcon = wrapCustomElement("sl-icon");
 
 export default function DrawerItem({ title, link }) {
   const Router = useRouter();

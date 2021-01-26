@@ -13,6 +13,11 @@ import {
   SlRange,
   SlAlert,
   SlButtonGroup,
+  SlIconButton,
+  SlDialog,
+  SlTabGroup,
+  SlTabPanel,
+  SlTab,
 } from "@shoelace-style/shoelace";
 
 function CustomEls({ URL }) {
@@ -32,6 +37,11 @@ function CustomEls({ URL }) {
     customElements.define("sl-range", SlRange);
     customElements.define("sl-alert", SlAlert);
     customElements.define("sl-button-group", SlButtonGroup);
+    customElements.define("sl-icon-button", SlIconButton);
+    customElements.define("sl-dialog", SlDialog);
+    customElements.define("sl-tab-group", SlTabGroup);
+    customElements.define("sl-tab-panel", SlTabPanel);
+    customElements.define("sl-tab", SlTab);
     customEls.current = true;
   }, [URL, customEls]);
 
