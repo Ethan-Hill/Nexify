@@ -1,6 +1,6 @@
 const withPWA = require("next-pwa");
 const path = require("path");
-const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
 
 const settings = {
   functions: {
@@ -15,19 +15,25 @@ const settings = {
     dest: "public",
     register: true,
     scope: "/src",
+    publicExcludes: ["!robots.txt", "!sitemap.xml.gz"],
   },
 
-  webpack:(config) => {config.plugins.push(  new CopyPlugin({
-	patterns: [
-	  {
-		from: path.resolve(__dirname, 'node_modules/@shoelace-style/shoelace/dist/shoelace/icons'),
-		to: path.resolve(__dirname, 'static/icons')
-	  }
-	]
-  }))
-  return config
-}
-
+  webpack: (config) => {
+    config.plugins.push(
+      new CopyPlugin({
+        patterns: [
+          {
+            from: path.resolve(
+              __dirname,
+              "node_modules/@shoelace-style/shoelace/dist/shoelace/icons"
+            ),
+            to: path.resolve(__dirname, "static/icons"),
+          },
+        ],
+      })
+    );
+    return config;
+  },
 };
 
 module.exports =
