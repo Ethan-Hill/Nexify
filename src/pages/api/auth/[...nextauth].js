@@ -22,7 +22,15 @@ const options = {
   ],
   session: {
     jwt: true,
-    signingKey: process.env.JWT_SIGNING_PRIVATE_KEY,
+    maxAge: 1 * 60 * 60,
+  },
+  jwt: {
+    secret: process.env.JWT_SCERET,
+    encryption: true,
+    signingKey:
+      '{"kty":"oct","kid":"FHod4bgiUcSEaOhl0OfCzDmik9edi5Xa1sOYifuxlFA","alg":"HS512","k":"KxDOwUWHA6M5WwPqFbkzvtVSokgRMJKGUpt7MgTK304"}',
+    encryptionKey:
+      '{"kty":"oct","kid":"4OE5sj1o7qw_Bna5GW75RGPfmZXmf2L9D_8lcXMEXMk","alg":"A256GCM","k":"9LV06kvfrbWp4TkVjvhIIV7OqsOgomaL79ZeYsKc0UQ"}',
   },
   callbacks: {
     jwt: async (token, user, account) => {
@@ -33,7 +41,7 @@ const options = {
       return Promise.resolve(token);
     },
     session: async (session, token) => {
-      const profile = await axios
+      await axios
         .get("https://api.spotify.com/v1/me", {
           headers: {
             Authorization: `Bearer ${token.accessToken}`,
