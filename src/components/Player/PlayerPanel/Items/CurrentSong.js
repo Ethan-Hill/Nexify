@@ -12,7 +12,7 @@ export default function CurrentSong({ src, name, artists }) {
           {name}
         </h1>
         <div className="flex items-center">
-          <h1 className="text-lsmtext-white dark:text-gray-700 ">
+          <h1 className="text-white text-md dark:text-gray-700 ">
             {artist_names}
           </h1>
           <CurrentTrackInfo />

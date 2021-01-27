@@ -5,7 +5,7 @@ import wrapCustomElement from "@shoelace-style/react-wrapper";
 const ShoelaceButton = wrapCustomElement("sl-button");
 const ShoelaceIcon = wrapCustomElement("sl-icon");
 
-export default function Logout() {
+export default function Login() {
   return (
     <div className="h-24 p-5 ">
       <ShoelaceButton
