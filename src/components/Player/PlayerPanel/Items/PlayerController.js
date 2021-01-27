@@ -71,7 +71,7 @@ export default function CurrentSong({ isPlaying, isShuffle, isRepeat }) {
 
   const previousPlayback = () => {
     axios
-      .put(
+      .post(
         "https://api.spotify.com/v1/me/player/previous",
         {},
         {
