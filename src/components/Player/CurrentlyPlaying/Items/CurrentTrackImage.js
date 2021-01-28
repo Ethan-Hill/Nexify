@@ -5,8 +5,8 @@ export default function UserImage({ src }) {
     return (
       <img
         className="object-cover object-center h-56"
-        width="224px"
-        height="224px"
+        width="100%"
+        height="100%"
         alt="Current Song Img"
         src={src}
       />
