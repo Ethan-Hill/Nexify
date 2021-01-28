@@ -198,33 +198,24 @@ export default function CurrentSong({ isPlaying, isShuffle, isRepeat }) {
 
   if (isPlaying) {
     return (
-      <div className="flex items-center justify-center flex-1">
-        <sl-button-group>
-          <PlaybackShuffle
-            handleClick={shuffleToggle}
-            shuffleState={isShuffle}
-          />
-          <PlaybackPrevious handleClick={previousPlayback} />
-          <PlaybackPause handleClick={pausePlayback} />
-          <PlaybackNext handleClick={nextPlayback} />
-          <PlaybackRepeat handleClick={repeatToggle} repeatState={isRepeat} />
-        </sl-button-group>
+      <div className="flex items-center justify-around flex-1">
+        <PlaybackShuffle handleClick={shuffleToggle} shuffleState={isShuffle} />
+        <PlaybackPrevious handleClick={previousPlayback} />
+        <PlaybackPause handleClick={pausePlayback} />
+        <PlaybackNext handleClick={nextPlayback} />
+        <PlaybackRepeat handleClick={repeatToggle} repeatState={isRepeat} />
       </div>
     );
   }
 
   if (!isPlaying) {
     return (
-      <div className="flex items-center justify-center flex-1">
-        <sl-button-group>
-          <PlaybackShuffle
-            handleClick={shuffleToggle}
-            shuffleState={isShuffle}
-          />
-          <PlaybackPrevious handleClick={previousPlayback} />
-          <PlaybackResume handleClick={resumePlayback} />
-          <PlaybackNext handleClick={nextPlayback} />
-        </sl-button-group>
+      <div className="flex items-center justify-around flex-1">
+        <PlaybackShuffle handleClick={shuffleToggle} shuffleState={isShuffle} />
+        <PlaybackPrevious handleClick={previousPlayback} />
+        <PlaybackResume handleClick={resumePlayback} />
+        <PlaybackNext handleClick={nextPlayback} />
+        <PlaybackRepeat handleClick={repeatToggle} repeatState={isRepeat} />
       </div>
     );
   }
