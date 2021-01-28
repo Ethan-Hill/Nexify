@@ -10,7 +10,7 @@ export default function UserImage({ src }) {
         src={"https://i.imgur.com/AtMhw8m.png"}
         width="224px"
         height="224px"
-        alt="Current Song Image"
+        alt="Current Song Img"
       />
     );
   }
