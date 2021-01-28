@@ -30,13 +30,9 @@ export default function CurrentSong({ amount }) {
   return (
     <div className="flex items-center justify-end flex-1 md:hidden">
       <div className="flex justify-center w-64 mr-2">
-        <sl-range
-          min="0"
-          max="100"
-          step="5"
-          id="range"
-          value={amount}
-        ></sl-range>
+        <sl-range min="0" max="100" step="5" id="range" value={amount}>
+          <label for="range"></label>
+        </sl-range>
       </div>
     </div>
   );

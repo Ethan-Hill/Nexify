@@ -10,6 +10,8 @@ export default function DrawerItem({ user }) {
             src={user.image}
             alt="UserImage"
             className="h-16 mr-2 rounded-full"
+            width="64px"
+            height="64px"
           />
         ) : null
       }
