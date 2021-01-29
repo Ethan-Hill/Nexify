@@ -19,6 +19,7 @@ import {
   SlTabPanel,
   SlTab,
   SlTooltip,
+  SlDetails,
 } from "@shoelace-style/shoelace";
 
 function CustomEls({ URL }) {
@@ -44,6 +45,7 @@ function CustomEls({ URL }) {
     customElements.define("sl-tab-panel", SlTabPanel);
     customElements.define("sl-tab", SlTab);
     customElements.define("sl-tooltip", SlTooltip);
+    customElements.define("sl-details", SlDetails);
     customEls.current = true;
   }, [URL, customEls]);
 

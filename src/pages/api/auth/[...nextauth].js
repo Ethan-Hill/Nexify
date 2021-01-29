@@ -7,7 +7,7 @@ const options = {
   providers: [
     Providers.Spotify({
       scope:
-        "user-read-email playlist-modify-public playlist-modify-private user-read-private user-read-playback-state user-modify-playback-state playlist-modify-public playlist-modify-private",
+        "user-read-email playlist-modify-public playlist-modify-private user-read-private user-read-playback-state user-modify-playback-state playlist-modify-public playlist-modify-private user-top-read",
       clientId: process.env.SPOTIFY_CLIENT_ID,
       clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
       profile(profile) {

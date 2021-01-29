@@ -8,6 +8,7 @@ import "@shoelace-style/shoelace/dist/shoelace/shoelace.css";
 import "@shoelace-style/shoelace/themes/dark.css";
 import "nprogress/nprogress.css";
 import "tailwindcss/tailwind.css";
+import "swiper/swiper.scss";
 
 import CustomEls from "../components/CustomEls";
 import SiteLayout from "../components/Layouts/SiteLayout";

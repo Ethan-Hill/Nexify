@@ -20,6 +20,8 @@ const PlayerPanel = dynamic(() =>
   import("../../components/Player/PlayerPanel/PlayerPanel")
 );
 
+const Slider = dynamic(() => import("../../components/Player/Slider/Slider"));
+
 import { useSession, getSession } from "next-auth/client";
 
 function Player(props, { errorCode, errorMessage }) {
@@ -38,12 +40,22 @@ function Player(props, { errorCode, errorMessage }) {
 
   const initialData = props.currentTrack;
 
+  const initialData2 = props.topTracks;
+
   const { data: currentTrack, error } = useSWR(
     "https://api.spotify.com/v1/me/player",
     fetcher,
     {
       initialData,
       refreshInterval: 2500,
+    }
+  );
+
+  const { data: topTracks } = useSWR(
+    "https://api.spotify.com/v1/me/top/tracks?limit=5",
+    fetcher,
+    {
+      initialData2,
     }
   );
 
@@ -76,15 +88,15 @@ function Player(props, { errorCode, errorMessage }) {
     }
     return (
       <PlayerLayout>
-        <main className="flex flex-col items-center justify-center flex-1 w-8/12">
+        <main className="flex flex-wrap items-center justify-around flex-1 w-full">
           <TrackInfo track={currentTrack} />
           <CurrentlyPlaying track={currentTrack} />
-          {
-            //Check if message failed
-            session.user.profile.product === "premium" ? (
-              <PlayerPanel track={currentTrack} device={currentTrack.device} />
-            ) : null
-          }
+
+          <Slider tracks={topTracks.items} />
+
+          {session.user.profile.product === "premium" ? (
+            <PlayerPanel track={currentTrack} device={currentTrack.device} />
+          ) : null}
           <Switch />
         </main>
       </PlayerLayout>
@@ -115,8 +127,12 @@ export async function getServerSideProps(context) {
 
   const currentTrack = await fetcher("https://api.spotify.com/v1/me/player");
 
+  const topTracks = await fetcher(
+    "https://api.spotify.com/v1/me/top/tracks?limit=5"
+  );
+
   return {
-    props: { session, currentTrack },
+    props: { session, currentTrack, topTracks },
   };
 }
 

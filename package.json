@@ -23,6 +23,8 @@
     "postcss": "^8.2.4",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "sass": "^1.32.5",
+    "swiper": "^6.4.10",
     "swr": "^0.4.0",
     "tailwindcss": "^2.0.2",
     "typeface-work-sans": "^1.1.13"

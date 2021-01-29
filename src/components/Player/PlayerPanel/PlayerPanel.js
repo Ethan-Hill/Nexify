@@ -6,8 +6,6 @@ import wrapCustomElement from "@shoelace-style/react-wrapper";
 const CurrentSong = dynamic(() => import("./Items/CurrentSong"));
 const PlayerController = dynamic(() => import("./Items/PlayerController"));
 const PlayerVolume = dynamic(() => import("./Items/PlayerVolume"));
-const ShoelaceButton = wrapCustomElement("sl-button");
-const ShoelaceIcon = wrapCustomElement("sl-icon");
 
 export default function PlayerPanel({ track, device }) {
   const Router = useRouter();
@@ -17,7 +15,7 @@ export default function PlayerPanel({ track, device }) {
   };
 
   return (
-    <div className="absolute bottom-0 w-screen h-24 bg-backgroundBlue dark:bg-white ">
+    <div className="fixed bottom-0 w-screen h-24 bg-backgroundBlue dark:bg-white ">
       <div className="flex w-full h-full sm:justify-center">
         <CurrentSong
           src={track.item.album.images[0].url}

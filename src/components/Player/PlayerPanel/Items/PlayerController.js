@@ -198,7 +198,7 @@ export default function CurrentSong({ isPlaying, isShuffle, isRepeat }) {
 
   if (isPlaying) {
     return (
-      <div className="flex items-center justify-around flex-1">
+      <div className="flex items-center flex-1 justify-evenly">
         <PlaybackShuffle handleClick={shuffleToggle} shuffleState={isShuffle} />
         <PlaybackPrevious handleClick={previousPlayback} />
         <PlaybackPause handleClick={pausePlayback} />
@@ -210,7 +210,7 @@ export default function CurrentSong({ isPlaying, isShuffle, isRepeat }) {
 
   if (!isPlaying) {
     return (
-      <div className="flex items-center justify-around flex-1">
+      <div className="flex items-center flex-1 justify-evenly">
         <PlaybackShuffle handleClick={shuffleToggle} shuffleState={isShuffle} />
         <PlaybackPrevious handleClick={previousPlayback} />
         <PlaybackResume handleClick={resumePlayback} />
