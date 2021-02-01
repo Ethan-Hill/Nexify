@@ -1,7 +1,7 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
+const defaultTheme = require("tailwindcss/defaultTheme")
 
 module.exports = {
-  purge: ["./src/pages/**/*.js", "./src/components/**/*.js"],
+  purge: ["./pages/**/*.js", "./components/**/*.js"],
   darkMode: "class", // or 'media' or 'class'
   theme: {
     extend: {
@@ -41,4 +41,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-};
+}
