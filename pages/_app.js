@@ -1,25 +1,25 @@
-import { setOptions, getSession, Provider } from "next-auth/client";
-import { ThemeProvider } from "next-themes";
-import Head from "next/head";
-import NProgress from "nprogress";
-import Router from "next/router";
+import { setOptions, getSession, Provider } from "next-auth/client"
+import { ThemeProvider } from "next-themes"
+import Head from "next/head"
+import NProgress from "nprogress"
+import Router from "next/router"
 
-import "@shoelace-style/shoelace/dist/shoelace/shoelace.css";
-import "@shoelace-style/shoelace/themes/dark.css";
-import "nprogress/nprogress.css";
-import "tailwindcss/tailwind.css";
-import "swiper/swiper.scss";
+import "@shoelace-style/shoelace/dist/shoelace/shoelace.css"
+import "@shoelace-style/shoelace/themes/dark.css"
+import "nprogress/nprogress.css"
+import "tailwindcss/tailwind.css"
+import "swiper/swiper.scss"
 
-import CustomEls from "../components/CustomEls";
-import SiteLayout from "../components/Layouts/SiteLayout";
+import CustomEls from "../components/CustomEls"
+import SiteLayout from "../components/Layouts/SiteLayout"
 
-setOptions({ site: "http://localhost:3000" });
+setOptions({ site: "http://localhost:3000" })
 
-require("typeface-work-sans");
+require("typeface-work-sans")
 
-Router.events.on("routeChangeStart", () => NProgress.start());
-Router.events.on("routeChangeComplete", () => NProgress.done());
-Router.events.on("routeChangeError", () => NProgress.done());
+Router.events.on("routeChangeStart", () => NProgress.start())
+Router.events.on("routeChangeComplete", () => NProgress.done())
+Router.events.on("routeChangeError", () => NProgress.done())
 
 function App({ Component, pageProps, session, URL }) {
   return (
@@ -33,7 +33,7 @@ function App({ Component, pageProps, session, URL }) {
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#151c3c" />
         <meta name="description" content="Spotify All In One." />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.ico" />
         <meta name="twitter:card" content="Spotify All In One" />
         <meta name="twitter:url" content="https://nexify.vercel.app" />
         <meta name="twitter:title" content="Nexify" />
@@ -56,17 +56,17 @@ function App({ Component, pageProps, session, URL }) {
         </SiteLayout>
       </ThemeProvider>
     </Provider>
-  );
+  )
 }
 
 App.getInitialProps = async (context) => {
-  const session = await getSession(context);
-  const URL = process.env.NEXTAUTH_URL;
+  const session = await getSession(context)
+  const URL = process.env.NEXTAUTH_URL
 
   return {
     session,
     URL,
-  };
-};
+  }
+}
 
-export default App;
+export default App
