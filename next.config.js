@@ -1,6 +1,6 @@
-const withPWA = require("next-pwa");
-const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
+const withPWA = require("next-pwa")
+const path = require("path")
+const CopyPlugin = require("copy-webpack-plugin")
 
 const settings = {
   functions: {
@@ -14,7 +14,7 @@ const settings = {
   pwa: {
     dest: "public",
     register: true,
-    scope: "/src",
+    scope: "/",
     publicExcludes: ["!robots.txt", "!sitemap.xml.gz"],
   },
 
@@ -31,10 +31,10 @@ const settings = {
           },
         ],
       })
-    );
-    return config;
+    )
+    return config
   },
-};
+}
 
 module.exports =
-  process.env.NODE_ENV === "development" ? settings : withPWA(settings);
+  process.env.NODE_ENV === "development" ? settings : withPWA(settings)
