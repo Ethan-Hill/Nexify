@@ -10,7 +10,6 @@ import "nprogress/nprogress.css"
 import "tailwindcss/tailwind.css"
 import "swiper/swiper.scss"
 
-import CustomEls from "../components/CustomEls"
 import SiteLayout from "../components/Layouts/SiteLayout"
 
 setOptions({ site: "http://localhost:3000" })
@@ -27,8 +26,6 @@ function App({ Component, pageProps, session, URL }) {
       session={session}
       options={{ clientMaxAge: 60 * 60, keepAlive: 5 * 60 }}
     >
-      {process.browser && <CustomEls URL={URL} />}
-
       <Head>
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#151c3c" />
@@ -45,6 +42,14 @@ function App({ Component, pageProps, session, URL }) {
         <meta property="og:site_name" content="Nexify" />
         <meta property="og:url" content="https://nexify.vercel.app" />
         <link rel="manifest" href="/manifest.json" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.26/dist/shoelace/shoelace.css"
+        />
+        <script
+          type="module"
+          src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.0.0-beta.26/dist/shoelace/shoelace.esm.js"
+        ></script>
         <meta
           name="viewport"
           content="minimum-scale=1, maximum-scale=5 initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover"
@@ -61,11 +66,9 @@ function App({ Component, pageProps, session, URL }) {
 
 App.getInitialProps = async (context) => {
   const session = await getSession(context)
-  const URL = process.env.NEXTAUTH_URL
 
   return {
     session,
-    URL,
   }
 }
 
